@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1581080061 source:c:\users\user\desktop\projects\navmesh\astar\main.cpp
+	"main.h"
+	<string.h>
+	<vector>
+	<algorithm>
+	<boost/algorithm/cxx11/any_of.hpp>
+
+1581080080 c:\users\user\desktop\projects\navmesh\astar\main.h
+

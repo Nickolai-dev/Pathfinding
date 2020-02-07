@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1581055377 source:c:\users\user\desktop\projects\navmesh\main.cpp
+	<iostream>
+	"main.h"
+
+1581055640 c:\users\user\desktop\projects\navmesh\astar\main.h
+
