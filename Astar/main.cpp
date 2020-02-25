@@ -28,8 +28,10 @@ DLL_EXPORT bool Node::operator==(Node another) {
     return this->x==another.x&&this->y==another.y;
 }
 DLL_EXPORT void FindPath(CsSquaredArray& mesh, const DataConfig& data, DataResult& result, int maxContainerSize) {
-    std::vector<Node> open, closed, neighbours;
-    Node start(data.starty, data.startx, nullptr), end(data.endy, data.endx, nullptr), *current;
+    std::vector<Node*> open, closed;
+    std::vector<Node> neighbours;
+    Node *start = new Node(data.starty, data.startx, nullptr),
+         *end = new Node(data.endy, data.endx, nullptr), *current = nullptr;
     open.push_back(start);
     while(open.size() > 0) {
         std::sort(open.begin(), open.end(), [](Node a, Node b) {return 0;} );
@@ -44,12 +46,41 @@ DLL_EXPORT void FindPath(CsSquaredArray& mesh, const DataConfig& data, DataResul
                 if (anyNode.x < mesh.LowerBound0 || anyNode.x > mesh.Length0) continue;
                 if (anyNode.y < mesh.LowerBound1 || anyNode.y > mesh.Length1) continue;
                 if (mesh[anyNode.y][anyNode.x] == 0)
-                    if(!boost::algorithm::any_of(closed.begin(), closed.end(), [anyNode](Node node)
-                                                 { return node.x==anyNode.x&&node.y==anyNode.y; } ))
+                    if(!boost::algorithm::any_of(closed.begin(), closed.end(), [anyNode](Node *node)
+                                                 { return *node == anyNode; } )) {
                         neighbours.push_back(anyNode);
-        }
+                    }
+            }
         for(Node node : neighbours) {
-            node.prev =
+            node.prev = current;
+            auto mbHaveAlrdy = std::find_if(open.begin(), open.end(), [node](Node* eq){ return *eq == node; });
+            if(mbHaveAlrdy == open.end()) {
+                open.push_back(new Node());
+                *open[open.size()-1] = node;
+            } else {
+                if(/*shorter path (through current to founded node mbHaveAlrdy)*/
+                   current->nodesTraversedWeight(*mbHaveAlrdy) < (*mbHaveAlrdy)->nodesTraversedWeight()) {
+                    (*mbHaveAlrdy)->prev = current;
+                } else /*useless node, delete*/ {
+                    delete *mbHaveAlrdy;
+                }
+            }
+
+            if(node == *end) {
+                // write in array
+                current = end;
+                while(current != nullptr) {
+                    // current->y current->x
+                    current = current->prev;
+                }
+                // and delete heap
+                for(auto i = closed.begin(); i != closed.end(); i++) {
+                    delete *i;
+                }
+                for(auto i = open.begin(); i != open.end(); i++) {
+                    delete *i;
+                }
+            }
         }
     }
     throw new std::logic_error("Can`t find a path. Probably it doesn`t exist");

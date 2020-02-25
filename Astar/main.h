@@ -44,6 +44,8 @@ struct Node {
     Node(int y, int x, Node *prev) : y(y), x(x), prev(prev) {};
     Node() : y(0), x(0), prev(nullptr) {};
     bool operator==(Node another);
+    size_t nodesTraversedWeight();
+    size_t nodesTraversedWeight(Node *nbr); /// path weiight including any neighbour last node; throws logicerr
 };
 
 #ifdef __cplusplus
