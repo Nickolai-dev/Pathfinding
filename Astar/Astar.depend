@@ -8,3 +8,12 @@
 
 1581080080 c:\users\user\desktop\projects\navmesh\astar\main.h
 
+1584070270 source:c:\users\hp\desktop\pf\pathfinding\astar\main.cpp
+	"main.h"
+	<string.h>
+	<iostream>
+
+1584070190 c:\users\hp\desktop\pf\pathfinding\astar\main.h
+	<vector>
+	<algorithm>
+

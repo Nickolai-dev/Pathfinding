@@ -17,13 +17,14 @@ int main() {
                     };
     CsSquaredArray mesh = CsArrayFactory::csSquaredArray(m, 10, 10);
     //cout << mesh.Length;
+    cout << "kk" << endl;
     for(int i = 0; i < mesh.Length1; i++) {
         for(int q = 0; q < mesh.Length0; q++)
             cout << (int)mesh[i][q] << " ";
         cout << endl;
     }
-    cout << endl;
-    DataResult data = FindPath(mesh, DataConfig(2,4, 6,4));
+    CsSquaredArray result = CsArrayFactory::csSquaredArray(2, 100);
+    FindPath(mesh, DataConfig(2,4, 6,4), result, 200);
 
     return 0;
 }

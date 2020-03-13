@@ -5,3 +5,11 @@
 
 1581055640 c:\users\user\desktop\projects\navmesh\astar\main.h
 
+1582637729 source:c:\users\hp\desktop\pf\pathfinding\main.cpp
+	<iostream>
+	"main.h"
+
+1582636044 c:\users\hp\desktop\pf\pathfinding\astar\main.h
+	<vector>
+	<algorithm>
+

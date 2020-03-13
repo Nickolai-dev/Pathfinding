@@ -14,15 +14,20 @@
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
-					<Add option="-O2" />
+					<Add option="-O3" />
 					<Add option="-Wall" />
 					<Add option="-std=c++1z" />
 					<Add option="-DBUILD_DLL" />
 				</Compiler>
 				<Linker>
+					<Add option="-O3" />
 					<Add option="-s" />
 					<Add library="user32" />
 				</Linker>
+				<ExtraCommands>
+					<Add after="cp bin\Release\Astar.dll ..\..\..\Test1\Test1\bin\Debug\netcoreapp3.1\Astar.dll" />
+					<Mode after="always" />
+				</ExtraCommands>
 			</Target>
 		</Build>
 		<Linker>
