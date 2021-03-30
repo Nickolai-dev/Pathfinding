@@ -16,7 +16,7 @@
 
 struct Node {
     int y, x;
-    Node *prev;
+    Node *prev = nullptr;
     Node(int y, int x, Node *prev) : y(y), x(x), prev(prev) {};
     Node() : y(0), x(0), prev(nullptr) {};
     bool operator==(Node another);
@@ -37,8 +37,8 @@ extern "C"
 {
 #endif
 
-DLL_EXPORT void FindPath(const CsSquaredArray<char> &mesh, CsSquaredArray<char> &result,
-                         int x, int y, int ex, int ey, int fixedContainerSize); // DataResult is a container witch fixed on C# side; has fixed size; if owerflow throws exception
+DLL_EXPORT void FindPath(CsSquaredArray<int> &mesh, CsSquaredArray<int> &result,
+                         int x, int y, int ex, int ey); // DataResult is a container witch fixed on C# side; has fixed size; if owerflow throws exception
 DLL_EXPORT int sum(int a, int b);
 #ifdef __cplusplus
 }
